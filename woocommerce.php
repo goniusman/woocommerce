@@ -234,7 +234,26 @@ if ( $terms ) {
 }
 
 
+// get product_tags of the current product
+$current_tags = get_the_terms( get_the_ID(), 'product_tag' );
 
+//only start if we have some tags
+if ( $current_tags && ! is_wp_error( $current_tags ) ) { 
+
+    //create a list to hold our tags
+    echo '<ul class="product_tags">';
+
+    //for each tag we create a list item
+    foreach ($current_tags as $tag) {
+
+        $tag_title = $tag->name; // tag name
+        $tag_link = get_term_link( $tag );// tag archive link
+
+        echo '<li><a href="'.$tag_link.'">'.$tag_title.'</a></li>';
+    }
+
+    echo '</ul>';
+}
 
 
 
